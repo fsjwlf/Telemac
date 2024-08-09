@@ -10,8 +10,8 @@ sudo apt install libhdf5-dev hdf5-tools
 ```
 
 ## 1.2 安装metis
+下载 metis，https://github.com/fsjwlf/Telemac/raw/main/metis-5.1.0.tar.gz，并复制到当前文件夹
 ```bash
-wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 tar -xzvf metis-5.1.0.tar.gz
 mv metis-5.1.0 metis
 cd metis
