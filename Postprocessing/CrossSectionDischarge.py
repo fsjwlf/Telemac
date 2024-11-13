@@ -9,7 +9,8 @@ from data_manip.extraction.telemac_file import TelemacFile
 import numpy as np
 
 def CartesianDischarge(filename, xy, timesteps):
-    # 投影坐标系（米）
+    # 投影坐标
+    # 输入文件名、两个端点的坐标、时间步数
     res = TelemacFile(filename)
     x1, y1, x2, y2 = xy  # 断面端点坐标
     vx, vy = x2-x1, y2-y1
@@ -24,10 +25,11 @@ def CartesianDischarge(filename, xy, timesteps):
         print(time, np.sum(d[:,time])*l)
         
 def GeographicDischarge(filename, xy, timesteps):
-    # 地理坐标系（经纬度）
+    # 地理坐标（经纬度）
+    # 输入文件名、两个端点的坐标、时间步数
     res = TelemacFile(filename)
     x1, y1, x2, y2 = xy
-    vx, vy = (x2-x1)*100000*np.cos(y2/180*np.pi), (y2-y1)*100000
+    vx, vy = (x2-x1)*100000*np.cos(y2/180*np.pi), (y2-y1)*100000  # 经纬度转米
     poly_points, poly_number = [[x1, y1], [x2, y2]], [200]
     poly_coord, abs_curv,u = res.get_timeseries_on_polyline('FLOWRATE ALONG X', poly_points, poly_number)
     poly_coord, abs_curv,v = res.get_timeseries_on_polyline('FLOWRATE ALONG Y', poly_points, poly_number)
